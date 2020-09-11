@@ -5,12 +5,12 @@ import { LocalizationStringsProviderContract } from '../Contacts/LocalizationStr
 import { LocalizatorContract } from '../Contacts/LocalizatorContract';
 
 export class Localizator implements LocalizatorContract {
-    private readonly _provider: LocalizationStringsProviderContract;
+    private readonly _localizationStringsProvider: LocalizationStringsProviderContract;
 
     public constructor(dep: {
-        provider: LocalizationStringsProviderContract
+        localizationStringsProvider: LocalizationStringsProviderContract
     }) {
-        this._provider = dep.provider;
+        this._localizationStringsProvider = dep.localizationStringsProvider;
 
         moment.locale(this.getCurrentLanguage());
     }
@@ -31,14 +31,14 @@ export class Localizator implements LocalizatorContract {
     }
 
     public getCurrentLanguage(): string {
-        return this._provider.getLanguage();
+        return this._localizationStringsProvider.getLanguage();
     }   
 
     public getString(key: string): Maybe<string> {
-        return this._provider.getString(key);
+        return this._localizationStringsProvider.getString(key);
     }
 
     public getStringWithLanguage(key: string, language: string): string {
-        return this._provider.getString(key, language);
+        return this._localizationStringsProvider.getString(key, language);
     }
 }
